@@ -2,6 +2,27 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+### Environment Variables
+
+This project requires Clerk authentication keys. You need to set up the following environment variables:
+
+1. **Get your Clerk keys:**
+   - Visit [Clerk Dashboard](https://dashboard.clerk.com/last-active?path=api-keys)
+   - Copy your **Publishable Key** (starts with `pk_test_` or `pk_live_`)
+   - Copy your **JWKS URL** (found in your Clerk instance settings)
+
+2. **For local development, create a `.env.local` file:**
+   ```bash
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_your_key_here
+   CLERK_JWKS_URL=https://your-clerk-instance.clerk.accounts.dev/.well-known/jwks.json
+   ```
+
+3. **For production builds:**
+   - Local build: Ensure `.env.local` exists with `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
+   - Docker build: Pass the key as a build argument (see Docker section below)
+
+### Development
+
 First, run the development server:
 
 ```bash
@@ -32,6 +53,53 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Building for Production
+
+### Local Build
+
+Make sure you have a `.env.local` file with `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` set:
+
+```bash
+npm run build
+```
+
+### Docker Build
+
+#### Option 1: Using Docker Compose (Recommended)
+
+1. Create a `.env` file in the project root with your credentials:
+
+```bash
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_your_key_here
+CLERK_JWKS_URL=https://your-clerk-instance.clerk.accounts.dev/.well-known/jwks.json
+OPENAI_API_KEY=sk-your-openai-api-key-here
+```
+
+2. Build and run with Docker Compose:
+
+```bash
+docker-compose up --build
+```
+
+The app will be available at `http://localhost:8000`
+
+#### Option 2: Manual Docker Build
+
+Build the Docker image with the Clerk publishable key:
+
+```bash
+docker build --build-arg NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_your_key_here -t saas-app .
+```
+
+Run the container:
+
+```bash
+docker run -p 8000:8000 \
+  -e CLERK_JWKS_URL=https://your-clerk-instance.clerk.accounts.dev/.well-known/jwks.json \
+  -e OPENAI_API_KEY=sk-your-openai-api-key-here \
+  saas-app
+```
 
 ## Deploy on Vercel
 
