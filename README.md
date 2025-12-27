@@ -154,6 +154,3 @@ Have questions or want to chat about the project? Reach out!
 ---
 
 **Built with ❤️ for healthcare professionals who deserve better tools**
-
-![Footer](./images/footer.png)
-<!-- Replace with a nice closing image or logo -->
