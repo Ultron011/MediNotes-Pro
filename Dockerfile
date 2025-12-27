@@ -14,8 +14,12 @@ COPY . .
 # The NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY is meant to be public (it starts with pk_)
 # It's safe to include in the build as it's designed for client-side use
 
-# Build the Next.js app (creates 'out' directory with static files)
-RUN npm run build
+# Receive the Clerk publishable key as a build argument and set as environment variable
+ARG NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+ENV NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=$NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+
+# Clean any existing build artifacts and build the Next.js app
+RUN rm -rf .next && npm run build
 
 # Stage 2: Create the final Python container
 FROM python:3.12-slim
