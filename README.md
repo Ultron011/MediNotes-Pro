@@ -105,27 +105,6 @@ pip install -r requirements.txt
 uvicorn server:app --reload
 ```
 
-![Running App](./images/running-app.png)
-<!-- Replace with a screenshot showing the app in action -->
-
-## 📸 Screenshots
-
-### Landing Page
-![Landing Page](./images/landing-page.png)
-<!-- Replace with a full screenshot of your beautiful landing page -->
-
-### Consultation Input
-![Input Form](./images/input-form.png)
-<!-- Replace with a screenshot of the consultation notes input interface -->
-
-### AI-Generated Results
-![Results](./images/results.png)
-<!-- Replace with a screenshot showing the three sections of generated content -->
-
-### Dark Mode
-![Dark Mode](./images/dark-mode.png)
-<!-- Replace with a screenshot showcasing dark mode -->
-
 ## 🎨 Features in Detail
 
 ### Real-Time Streaming
